@@ -28,7 +28,8 @@ class Solution(object):
         # we need to change those three references. Instead of thinking about
         # in what order I change them, I just change all three at once.
         pre = self
-        pre.next = head
+        pre.next = head # <<<< equals self.next = head
+                        # next attribute is likely not in Solution but setted manually
 
         while pre.next and pre.next.next:
             a = pre.next

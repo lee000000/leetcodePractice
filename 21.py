@@ -33,8 +33,7 @@ class Solution(object):
                 cur.next = l2
                 l2 = l2.next
             cur = cur.next # <<<< does not change head.next?
-        print(cur.val)
-        print(head.val)
+
 
         if not l1:
             cur.next = l2
