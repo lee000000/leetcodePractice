@@ -10,6 +10,7 @@ Your algorithm should use only constant space. You may not modify the values
 in the list, only nodes itself can be changed.
 '''
 from ListNode import *
+from pprint import pprint
 # Definition for singly-linked list.
 # class ListNode(object):
 #     def __init__(self, x):
@@ -23,32 +24,11 @@ class Solution(object):
         :rtype: ListNode
         """
 
-        # if not head or not head.next:
-        #     return head
-        #
-        # l = 0
-        # ptr_a = head
-        # ptr_b = head.next
-        #
-        # while head:
-        #     l += 1
-        #     ptr_a = ptr_a.next
-        #
-        # ptr_a = head
-        #
-        # # If Odd length
-        # if l % 2 == 1:
-        #     while ptr_b.next:
-        #         temp = ptr_a
-        #         ptr_a.next = ptr_b.next
-        #         ptr_b.next = ptr_a
-        #
-        # pass
+        # To go from pre -> a -> b -> b.next to pre -> b -> a -> b.next,
+        # we need to change those three references. Instead of thinking about
+        # in what order I change them, I just change all three at once.
         pre = self
-        print(pre)
-        print(self)
         pre.next = head
-        print(self.next)
 
         while pre.next and pre.next.next:
             a = pre.next
@@ -59,7 +39,7 @@ class Solution(object):
 
 
 def test():
-    a = [1, 2, 3, 4]
+    a = [1, 2, 3, 4, 5, 6]
     head = List_to_Link(a).head
     sl = Solution()
     b = sl.swapPairs(head)
