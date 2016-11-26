@@ -28,7 +28,7 @@ class Solution(object):
         :rtype: ListNode
         """
 
-    def addTwoNumbers_extra_zero(self, l1, l2):
+    def addTwoNumbers_in_order_result(self, l1, l2):
         """
         :type l1: ListNode
         :type l2: ListNode
@@ -37,7 +37,7 @@ class Solution(object):
         if not l1 or not l2:
             return l1 or l2
 
-        cur = ListNode(0)
+        cur = self
 
         carry = 0
         pre = None
@@ -49,12 +49,12 @@ class Solution(object):
                 carry = carry + l2.val
                 l2 = l2.next
             temp = ListNode(carry % 10)
-            cur.next = temp
-            temp.next = pre
-            pre, temp = temp, cur
-            carry = carry // 10
 
-        return cur
+            temp.next = pre
+            cur.next = temp
+            pre = temp
+            carry = carry // 10
+        return self.next
 
 
 
@@ -66,9 +66,8 @@ def test():
     l2 = [0, 9, 1]
     headA = List_to_Link(l1).head
     headB = List_to_Link(l2).head
-
     sol = Solution()
-    headC = sol.addTwoNumbers(headA, headB)
+    headC = sol.addTwoNumbers_extra_zero(headA, headB)
     Link_to_List(headC).print_list()
 
 
