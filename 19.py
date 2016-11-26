@@ -30,6 +30,7 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
+        # this is a comment for git stage test
         fast = slow = self
         self.next = head
         while fast.next:
