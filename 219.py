@@ -16,15 +16,16 @@ class Solution(object):
         """
         dic = {}
         for count, num in enumerate(nums):
-            if (num in dic.keys()):
-                if (count - dic[num] <= k):
+            if (num in dic.keys() and count - dic[num] <= k):
                     return True
             dic[num] = count
         return False
 
 
+
+
 if __name__ == "__main__":
-    a = [x for x in range(1, 15000)]
+    a = [1, 0, 1, 1]
 
     sol = Solution()
-    print(sol.containsNearbyDuplicate(a, 15000))
+    print(sol.containsNearbyDuplicate(a, 1))
