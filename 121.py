@@ -18,6 +18,15 @@ Output: 0
 
 In this case, no transaction is done, i.e. max profit = 0.
 
+
+Dynamic Programming:
+f(0) = 0 max = 0 min = 0 None or Null or n = 0
+
+f(1) = 0 max = 0 min = prices[0] 1 element  or n = 1
+f(2) = (dif = prices[1] - prices[0])  max = dif and min = min(prices[0], prices[1]) n = 2
+f(3) = max (dif = prices[3] - min, max), max = f(3), min = min(min, prices[3]) n = 3
+
+f(n) = max(prices[i] - min, f(n - 1)), min = min(prices[i], min)
 '''
 class Solution(object):
     def maxProfit(self, prices):
@@ -25,22 +34,33 @@ class Solution(object):
         :type prices: List[int]
         :rtype: int
         """
-        dif = 0
-        i = 0
-        while (i < len(prices)):
-            j = i + 1
-            while (j < len(prices)):
-                if ((prices[j] - prices[i]) > dif):
-                    dif = prices[j] - prices[i]
-                j += 1
+        # TLE
+        # dif = 0
+        # i = 0
+        # while (i < len(prices)):
+        #     j = i + 1
+        #     while (j < len(prices)):
+        #         if ((prices[j] - prices[i]) > dif):
+        #             dif = prices[j] - prices[i]
+        #         j += 1
+        #
+        #     i += 1
+        if not len(prices):
+            return 0
 
+        maxVal = [0] * (len(prices))
+        minVal = prices[0]
+        for i in range(len(prices)):
+            maxVal[i] = max(prices[i] - minVal, maxVal[i - 1])
+            minVal = min(prices[i], minVal)
+            print(maxVal[i], minVal)
             i += 1
-
-        return dif
+        print(maxVal)
+        return maxVal[i - 1]
 
 
 if __name__ == "__main__":
-    a = [7, 6, 4, 3, 1]
+    a = [7, 1, 3, 5, 6, 4]
     sol = Solution()
     dif = sol.maxProfit(a)
     print(dif)
