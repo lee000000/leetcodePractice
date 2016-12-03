@@ -32,3 +32,13 @@ class Solution(object):
             sumB += num
 
         return (sumA - sumB)
+
+    def missingNumberB(self, nums):
+            n = len(nums)
+            return reduce(operator.xor, nums) ^ [n, 1, n+1, 0][n % 4]
+
+    if __name__ == "__main__":
+        a = [0, 1, 3, 4, 5, 6]
+        sol = Solution()
+        ret = sol.missingNumber(a)
+        print(ret)
