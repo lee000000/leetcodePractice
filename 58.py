@@ -35,3 +35,6 @@ class Solution(object):
                 n -= 1
             return count
         return 0
+
+    def fasterSolution(self, s):
+        return len((s.rstrip(' ').split(" ")[-1]))
