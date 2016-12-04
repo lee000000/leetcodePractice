@@ -20,4 +20,11 @@ class Solution(object):
         if haystack == "":
             return -1
 
-        return haystack.find(needle)
+        interval = len(needle)
+        for i in range(len(haystack) - interval):
+            if haystack[i : i + interval] == needle:
+                return i
+            else:
+                i = i + interval
+
+        return -1
