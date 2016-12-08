@@ -18,6 +18,7 @@ class Solution(object):
         :type nums2: List[int]
         :rtype: List[int]
         """
+        #
         # ret = []
         # for s in nums[2]:
         #     if s in nums1:
