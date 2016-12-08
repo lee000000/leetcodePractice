@@ -48,14 +48,13 @@ class Solution(object):
         return ret
 
     def intersectII(self, nums1, nums1):
-        ret = []
         dic1 = collections.Counter(nums1)
         dic2 = collections.Counter(nums2)
-        for k in dic2:
-            if k in dic1.keys():
-                while dic1[k] != 0 and dic2[k] != 0:
-                    ret.append(k)
-                    dic1[k] -= 1
-                    dic2[k] -= 1
+        # for k in dic2:
+        #     if k in dic1.keys():
+        #         while dic1[k] != 0 and dic2[k] != 0:
+        #             ret.append(k)
+        #             dic1[k] -= 1
+        #             dic2[k] -= 1
 
-        return ret
+        return list((dic1 & dic2).elements())
