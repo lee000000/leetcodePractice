@@ -5,6 +5,7 @@ Given two arrays, write a function to compute their intersection.
 
 Example:
 Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2].
+[3, 2, 2, 1] [2, 1]    [2, 1]
 
 Note:
 Each element in the result must be unique.
@@ -17,7 +18,22 @@ class Solution(object):
         :type nums2: List[int]
         :rtype: List[int]
         """
-        return list(set(nums1).intersection(nums2))
+        # ret = []
+        # for s in nums[2]:
+        #     if s in nums1:
+        #         ret.append(s)
+        # i = len(ret) - 1
+        # if i == 0 or i == 1:
+        #     return ret
+        # else:
+        #     while i >= 0:
+        #         temp = ret[0 : i + 1].pop()
+        #         if temp not in ret:
+        #             ret.append(temp)
+        #         i -= 1
+        # return ret[i:]
+
+        return list(set(nums1).intersection(set(nums2)))
 
 
 if __name__ == "__main__":
@@ -25,4 +41,3 @@ if __name__ == "__main__":
     nums2 = [1, 2]
     sol = Solution()
     print(sol.intersection(nums1, nums2))
-    
