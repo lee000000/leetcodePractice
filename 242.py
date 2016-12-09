@@ -21,7 +21,13 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
-        return collections.Counter(s) == collections.Counter(t)
+        #return collections.Counter(s) == collections.Counter(t)
+        dic1, dic2 = {}, {}
+        for item in s:
+            dic1[item] = dic1.get(item, 0) + 1
+        for item in t:
+            dic2[item] = dic2.get(item, 0) + 1
+        return dic1 == dic2
 
 
 if __name__ == "__main__":
