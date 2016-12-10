@@ -43,6 +43,24 @@ class Solution(object):
 
 
         #return list(set(nums1).intersection(set(nums2)))
+=======
+        # ret = []
+        # for s in nums[2]:
+        #     if s in nums1:
+        #         ret.append(s)
+        # i = len(ret) - 1
+        # if i == 0 or i == 1:
+        #     return ret
+        # else:
+        #     while i >= 0:
+        #         temp = ret[0 : i + 1].pop()
+        #         if temp not in ret:
+        #             ret.append(temp)
+        #         i -= 1
+        # return ret[i:]
+
+        return list(set(nums1).intersection(set(nums2)))
+>>>>>>> aa3a3a394a8aea35c5a9286b32a9b0119d21a7a7
 
 
 if __name__ == "__main__":
