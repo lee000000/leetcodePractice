@@ -5,3 +5,5 @@ __pycache__/
 #python file
 test.py
 _*
+.DS_Store
+*.pyc
