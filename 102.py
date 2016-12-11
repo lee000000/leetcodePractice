@@ -32,6 +32,7 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[List[int]]
         """
+        # Bad runtime
         ans = []
         frontier = [root]
         while root and frontier:
