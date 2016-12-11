@@ -46,3 +46,38 @@ class Solution(object):
             ans.append(stack.pop())
 
         return ans
+
+
+    def levelOrderBottom(self, root):
+        # Find the height of the tree
+        h = self.heightOf(root)
+
+
+
+
+
+
+    def levelOrderBottom(self, root):
+        answ, L = [], [root]
+        while L and root:
+            answ.insert(0,[n.val for n in L])
+            L = [ C for N in L for C in (N.left,N.right) if C ]
+        return answ
+
+    def heightOf(self, root):
+        dic = {}
+        level = [root]
+        while root and level:
+            for node in level:
+                if node in dic.keys():
+                    dic[node] += 1
+                else:
+                    dic[node] = 1
+                    dic[node.left] = 1 if node.left
+                    dic[node.right] = 1 if node.right
+            nxt = [(node.left, node.right) for node in level]
+            level = [nd for nodeLR in nxt for nd in nodeLR if nd]
+
+        h = max([h for h in dic.values()])
+        print(h)
+        return h
