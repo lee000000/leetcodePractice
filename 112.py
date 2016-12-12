@@ -33,10 +33,16 @@ class Solution(object):
         :rtype: bool
         """
         if not root:
-            return False
+            return []
 
-        if not root.left and not root.right and not root.val - sum:
-            return True
+        if not root.left and not root.right:
+            if root.val == sum:
+                return [[root.val]]
+            else:
+                return []
 
-        sum -= root.val
-        return self.hasPathSum(root.left, sum) or self.hasPathSum(root.right, sum)
+
+        a = self.pathSum(root.left, sum - root.val) + \
+            self.pathSum(root.right, sum - root.val)
+
+        return [[root.val] + i for i in a]
