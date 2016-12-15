@@ -45,6 +45,58 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
+        # 1. good DP
+        ret = self.robHelper(root)
+        return max(ret[0], ret[1])
+
+
+    def robHelper(self, root):
+        if not root:
+            return [0, 0]
+
+        ret = [None, None]
+
+        # if the root node is not robbed
+        # then the left node and the right node can be
+        left = self.robHelper(root.left)
+        right = self.robHelper(root.right)
+
+        ret[0] = max(left[0], left[1]) + max(right[0], right[1])
+        ret[1] = root.val + left[0] + right[0]
+
+        return ret
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    def rob2(self, root):
+        # 2. naive DP
+        # TLE, also not good
+        dic = {}
+        return self.robH(root, dic)
+
+
+    def robH(self, root, dic):
+        if not root:
+            return 0
+        if root in dic.keys():
+            return dic[root]
+
+        maxRob = 0
+
+        if root.left:
+            maxRob += self.robH(root.left.left, dic) + self.robH(root.left.right, dic)
+        if root.right:
+            maxRob += self.robH(root.right.left, dic) + self.robH(root.right.right, dic)
+
+        maxRob = max(maxRob + root.val, self.robH(root.left, dic) + self.robH(root.right, dic))
+
+
+        dic[root] = maxRob
+        return maxRob
+
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    def rob3(self, root):
+        # 3. naive recursive way
         if not root:
             return 0
 
