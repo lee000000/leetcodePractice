@@ -46,6 +46,8 @@ class Solution(object):
 
         root = TreeNode(postorder.pop())
 
+        # this is the step that delays running time
+        # visited item can be saved in a dictionary for looking up
         i = inorder.index(root.val)
         leftIn = inorder[0 : i]
 
@@ -57,4 +59,45 @@ class Solution(object):
         return root
 
 
-    # def buildHelp(self, inorder, postorder, root):
+    def buildTreeHash(self, inorder, postorder):
+        '''
+        * inorder = [4,10,3,1,7,11,8,2]
+        * postorder = [4,1,3,10,11,8,2,7]
+                ___7___
+               /     \
+            10        2
+           /   \      /
+          4    3      8
+                \    /
+                 1  11
+
+        '''
+        dic = {}
+
+        for i, val in enumerate(inorder):
+            dic[val] = i
+
+        return self.help(inorder, 0, len(inorder) - 1, postorder, 0, len(postorder) - 1, dic)
+
+
+    def help(self, inorder, il, ir, postorder, pl, pr, dic):
+        if il > ir or pl > pr:
+            return None
+
+        root = TreeNode(postorder[pr])
+        i = dic[root.val]
+        print(i)
+        print(inorder[il:i-1])
+        print(postorder[pl:pr-il+i-1])
+
+
+        left = self.help(inorder, il, i, postorder, pl, pr - il + i - 1, dic)
+        right = self.help(inorder, i + 1, ir, postorder, pl - il + i, pr - 1, dic)
+        root.left = left
+        root.right = right
+
+
+        return root
+        root.left = self.help(leftIn, postorder, dic)
+
+        return root
