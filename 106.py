@@ -70,7 +70,7 @@ class Solution(object):
           4    3      8
                 \    /
                  1  11
-
+        runtime 102 ms
         '''
         dic = {}
 
@@ -86,18 +86,15 @@ class Solution(object):
 
         root = TreeNode(postorder[pr])
         i = dic[root.val]
-        print(i)
-        print(inorder[il:i-1])
-        print(postorder[pl:pr-il+i-1])
+        # print(i)
+        # print(inorder[il:i-1])
+        # print(postorder[pl:pr-il+i-1])
 
 
-        left = self.help(inorder, il, i, postorder, pl, pr - il + i - 1, dic)
+        left = self.help(inorder, il, i - 1, postorder, pl, pl - il + i - 1, dic)
         right = self.help(inorder, i + 1, ir, postorder, pl - il + i, pr - 1, dic)
         root.left = left
         root.right = right
 
-
-        return root
-        root.left = self.help(leftIn, postorder, dic)
 
         return root
