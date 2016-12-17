@@ -25,6 +25,7 @@ preorder = [7,10,4,3,1,2,8,11]
 #         self.val = x
 #         self.left = None
 #         self.right = None
+# 1. naive recursion
 # runtime 255ms
 class Solution(object):
     def buildTree(self, inorder, postorder):
@@ -58,43 +59,38 @@ class Solution(object):
 
         return root
 
-
+    # 2. Hashmap
+    # runtime 92ms
     def buildTreeHash(self, inorder, postorder):
         '''
         * inorder = [4,10,3,1,7,11,8,2]
         * postorder = [4,1,3,10,11,8,2,7]
                 ___7___
-               /     \
-            10        2
-           /   \      /
+               /       \
+            10          2
+           /   \       /
           4    3      8
                 \    /
                  1  11
         runtime 102 ms
         '''
         dic = {}
-
         for i, val in enumerate(inorder):
             dic[val] = i
 
-        return self.help(inorder, 0, len(inorder) - 1, postorder, 0, len(postorder) - 1, dic)
+        return self.buildHelp(preorder, 0, len(preorder), inorder, 0, len(inorder), dic)
 
 
-    def help(self, inorder, il, ir, postorder, pl, pr, dic):
-        if il > ir or pl > pr:
+    def buildHelp(self, preorder, ps, pe, inorder, iis, ie, dic):
+        if ps >= pe or iis >= ie:
             return None
-
-        root = TreeNode(postorder[pr])
+        # print(preorder[ps:pe])
+        root = TreeNode(preorder[ps])
         i = dic[root.val]
-        # print(i)
-        # print(inorder[il:i-1])
-        # print(postorder[pl:pr-il+i-1])
+        leftTreeSize = i - iis
 
-
-        left = self.help(inorder, il, i - 1, postorder, pl, pl - il + i - 1, dic)
-        right = self.help(inorder, i + 1, ir, postorder, pl - il + i, pr - 1, dic)
+        left = self.buildHelp(preorder, ps + 1, ps + 1 + leftTreeSize, inorder, iis, i, dic)
+        right = self.buildHelp(preorder, ps + 1 + leftTreeSize, pe, inorder, i + 1, ie, dic)
         root.left = left
         root.right = right
-
-
         return root
