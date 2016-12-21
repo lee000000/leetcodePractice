@@ -30,17 +30,38 @@ class Solution(object):
         """
         if m == 0 or n == 0:
             return 0
-        dp = [[0] * (n)] * m
+        dp = [[0 for _ in range(n)] for _ in range(m)]
         dp[0][0] = 1
-        # dp[0][1] = dp[1][0] = 1
-        for i in range(0, m):
-            for j in range(1, n):
-                # print((i, j))
-                #print((dp[i-1][j],  dp[i][j - 1]))
-                dp[i][j] = dp[i-1][j] + dp[i][j - 1]
+    
 
-            # print(dp[i])
+
+        for i in range(m):
+            for j in range(n):
+                # print((i, j))
+                # #print((dp[i-1][j],  dp[i][j - 1]))
+                # print((dp[i][j],  dp[i-1][j], dp[i][j - 1]))
+
+                dp[i][j] += dp[i-1][j] + dp[i][j - 1]
+
+        # for line in dp:
+        #     print(line)
         return dp[m - 1][n - 1]
+        # Wrong!
+        # Counting of row and column is incorrect
+        # if m == 0 or n == 0:
+        #     return 0
+        # dp = [[0 for _ in range(n)] for _ in range(m)]
+        # dp[0][0] = 1
+        #
+        # # dp[0][1] = dp[1][0] = 1
+        # for i in range(0, m):
+        #     for j in range(1, n):
+        #         # print((i, j))
+        #         #print((dp[i-1][j],  dp[i][j - 1]))
+        #         dp[i][j] = dp[i-1][j] + dp[i][j - 1]
+        #
+        #     # print(dp[i])
+        # return dp[m - 1][n - 1]
 
 
 def test():
