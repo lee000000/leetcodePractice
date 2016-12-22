@@ -6,6 +6,7 @@ Given a m x n grid filled with non-negative numbers, find a path from top
 left to bottom right which minimizes the sum of all numbers along its path.
 '''
 class Solution(object):
+    # runtime 68ms
     def minPathSum(self, grid):
         """
         :type grid: List[List[int]]
@@ -15,7 +16,7 @@ class Solution(object):
             return 0
         if len(grid[0]) == 1 or len(grid) == 1:
             return sum(grid)
-            
+
         m = len(grid)
         n = len(grid[0])
         minDP = [[0 for _ in range(n)] for _ in range(m)]
