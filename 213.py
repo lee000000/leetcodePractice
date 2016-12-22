@@ -21,7 +21,30 @@ house, determine the maximum amount of money you can rob tonight without alertin
 the police.
 '''
 class Solution(object):
-    def rob(self, nums):
+    def rob_DP2(self, nums):
+        if len(nums) == 1:
+            return nums[0]
+
+        return max(self.robSingle_2(nums, 0, len(nums) - 2), self.robSingle_2(nums, 1, len(nums) - 1))
+
+
+
+    def robSingle_2(self, nums, start, end):
+        """
+        This is the helper function
+        & rob a non-circular list of houses as House Robber I
+        """
+        # print((start, end))
+        # print(nums[start: end + 1])
+        curMax = 0
+        preMax = 0
+        for num in nums[start:end + 1]:
+            preMax, curMax = curMax, max(curMax, preMax + num)
+        # print(curMax)
+        # print("####################################")
+        return curMax
+
+    def rob_DP1(self, nums):
         """
         :type nums: List[int]
         :rtype: int
