@@ -35,6 +35,18 @@ and you want to check one by one to see if T has its subsequence.
 In this scenario, how would you change your code?
 '''
 class Solution(object):
+    def isSubSequence_2(self, s, t):
+        if len(t) < len(s):
+            return False
+
+        for l in s:
+            temp = t.find(l)
+            if temp == -1:
+                return False
+            t = t[temp + 1:]
+        return True
+
+
     # runtime 392 ms
     def isSubsequence(self, s, t):
         """
@@ -58,10 +70,10 @@ class Solution(object):
 
 
 def test():
-    s = "axc"
+    s = "abc"
     t = "ahgbdc"
     sol = Solution()
-    print(sol.isSubsequence(s, t))
+    print(sol.isSubSequence_2(s, t))
 
 
 if __name__ == "__main__":
