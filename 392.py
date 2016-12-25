@@ -35,6 +35,7 @@ and you want to check one by one to see if T has its subsequence.
 In this scenario, how would you change your code?
 '''
 class Solution(object):
+    # runtime 392 ms
     def isSubsequence(self, s, t):
         """
         :type s: str
