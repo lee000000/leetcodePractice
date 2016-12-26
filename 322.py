@@ -64,12 +64,51 @@ class Solution(object):
         else:
             return n
 
+# This functioin count how many total ways to make the amount
+# using coin set with infinite usage of each coin
+# [1, 2], 3 --> 2
+    def coinChange3(self, coins, amount):
+        return self.helpCoinChange4(coins, len(coins), amount)
+
+
+    def helpCoinChange3(self, coins, m, n):
+
+        if n == 0: # to make 0, there is 1 solution
+            return 1
+        if n < 0: # could not find a combination
+            return 0
+
+        if m <= 0 and n >= 1: # n is not completed but coin set is empty
+            return 0
+
+        return self.helpCoinChange3(coins, m - 1, n) + self.helpCoinChange3(coins, m, n - coins[m - 1])
+
+    def helpCoinChange4(self, coins, m, n):
+        # We need n + 1 rows as the table is bottom up (tabulation) to find
+        # possible ways to make each amount n
+        # layer by layer fill the table from lower number to higher number
+        table = [[0 for _ in range(m)] for _ in range(n + 1)]
+
+        # first row of the table is 1
+        for i in range(m):
+            table[0][i] = 1
+
+        # Fill rest of the table entries:
+        for i in range(1, n + 1):
+            for j in range(m):
+                coin = coins[j]
+                x = table[i - coin][j] if i - coin >= 0 else 0
+                y = table[i][j - 1] if j >= 1 else 0
+                table[i][j] = x + y
+
+        return table[n][m - 1]
+
 
 def test():
-    coins = [2147483647]
-    amount = 2
+    coins = [2, 3, 5]
+    amount = 11
     sol = Solution()
-    print(sol.coinChange2(coins, amount))
+    print(sol.coinChange3(coins, amount))
 
 
 if __name__ == "__main__":
