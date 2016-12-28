@@ -14,6 +14,27 @@ For example, given the following matrix:
 Return 4.
 '''
 class Solution(object):
+    def maximalSquareBest(self, matrix):
+        r = len(matrix)
+        c = len(matrix[0])
+        dp = [0 for _ in range(r + 1)]
+        maxSize, pre = 0, 0
+
+        for j in range(c):
+            for i in range(1, r + 1):
+                # temp = dp[i]
+                print("i is,", i, j)
+                if int(matrix[i - 1][j]) == 1:
+                    dp[i] = min(pre, min(dp[i - 1], dp[i])) + 1
+                    maxSize = max(maxSize, dp[i])
+                else:
+                    dp[i] = 0
+                pre = dp[i]
+            print(dp)
+            print("++++++++++++++++++++++++++++++++++++++++++")
+        return maxSize * maxSize
+
+
     def maximalSquareImproved(self, matrix):
         if len(matrix) == 0:
             return 0
@@ -73,9 +94,10 @@ class Solution(object):
 
 
 def test():
-    matrix = [[1,1,1,1],[1,1,1,0],[1,1,1,0]]
+    matrixA = [[1,1,0,0],[1,1,1,0],[0,1,0,0]]
+    matrix = ["10100","10111","11111","10010"]
     sol = Solution()
-    print(sol.maximalSquareImproved(matrix))
+    print(sol.maximalSquareBest(matrix))
 
 
 if __name__ =="__main__":
