@@ -67,7 +67,7 @@ class Solution(object):
         # and the last two numbers indicates an 'increasing' or
         # 'decreasing' pattern
         for i in range(index + 1, m):
-            print(i, count)
+
             if (increasing and nums[i] < nums[i - 1]) or \
             (not increasing and nums[i] > nums[i - 1]):
                 count += 1
