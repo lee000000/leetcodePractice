@@ -33,11 +33,27 @@ class Solution(object):
                 return k
         return nums[0]
 
+    def majorityElementClever(self, nums):
+        if len(nums) < 2:
+            return nums[0] if nums else 0
+
+        majNum = nums[0]
+        count = 1
+        for num in nums[1:]:
+            if count == 0:
+                count += 1
+                majNum = num
+            elif num == majNum:
+                count += 1
+            else:
+                count -= 1
+        return majNum
+
 
 def test():
-    nums = [1, 2, 2, 1, 2]
+    nums = [1, 2, 2, 1, 2, 3]
     sol = Solution()
-    print(sol.majorityElement(nums))
+    print(sol.majorityElementClever(nums))
 
 
 if __name__ =="__main__":
